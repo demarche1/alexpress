@@ -1,24 +1,25 @@
-import {createServer} from 'http'
-import Router from "./router.mjs";
+import alexpress from "./lib/alexpress.mjs";
 
-Router.get('/user/[0-9]+', ({_req, res, params}) => {
-  res.writeHead(200, {
+const app = alexpress()
+const server = app.server
+const router = app.router
+
+router.get('/user/[0-9]+', ({_req, res, params}) => {
+  return res.json([{
+    msg: 'deu boa!!',
+    params
+  }])
+})
+
+router.notFound(({_req, res}) => {
+  res.writeHead(404, {
     'Content-Type': 'application/json'
   })
-  res.end(JSON.stringify([{
-    message: 'deu boa!!',
-    param: params.user
-  }]))
+  return res.end(JSON.stringify({
+    message: 'Not-Found'
+  }))
 })
 
-Router.get('/user/id/[0-9]+/age/[0-9]+', ({req, res, params}) => {
-  console.log('deu boa!!', params)
-})
-
-createServer((req, res) => {
-  const {url, method} = req
-  Router.emit({path: url, method, req, res})
-})
-  .listen(3000, () => {
-  console.log('server is up')
+server.listen(3000, () => {
+  console.log('Server is up')
 })
