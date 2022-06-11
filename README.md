@@ -22,5 +22,6 @@ router.get('/user/[0-9]+', ({req, res, params}) => {
 ### Todos
 
 - [ ] Make a custom Request that retuns body parsed
+- [ ] Tests
 - [ ] Publish that lib on npm
 - [ ] Middleweres
