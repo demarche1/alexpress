@@ -17,6 +17,8 @@ router.get('/user/[0-9]+', ({req, res, params}) => {
   }])
 
 })
+
+app.listen(300, () => { console.log('Server on!') })
 ```
 
 ### Todos
