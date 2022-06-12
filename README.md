@@ -8,7 +8,6 @@ const app = alexpress()
 const server = app.server
 const router = app.router
 
-// ### Note!!! the dynamic params needs be RegExp ###
 router.get('/user/[0-9]+', ({req, res, params}) => {
 
   return res.json(200, [{
