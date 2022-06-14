@@ -4,40 +4,34 @@ const app = alexpress()
 const server = app.server
 const router = app.router
 
-router.get('/user/[0-9]+', ({_req, res, params}) => {
-  return res.json(200, {
-    msg: 'Deu boa!!',
-    params: [...params]
-  })
-})
-
-router.get('/user/[0-9]+/age/[0-9]+', ({_req, res, params}) => {
+router.get('/user/:id', (_req, res, params) => {
   return res.json(200, [{
     msg: 'deu boa!!',
-    params: [...params]
+    params
   }])
 })
 
-router.post('/user/[0-9]+/age/[0-9]+',  async ({req, res, params}) => {
-  const payload = {
+const auth = (req, res, next) => {
+  next()
+}
+
+router.get('/user/:id/age/:idade/name/:nome', auth, (_req, res, params) => {
+  return res.json(201, [{
     msg: 'deu boa!!',
-    params: [...params],
-    body: {}
-  }
-
-  for await (const data of req) {
-    try {
-      payload.body = JSON.parse(data)
-    } catch (e) {
-      throw new TypeError('Can not parse body.')
-      return
-    }
-  }
-
-  res.json(null, payload)
+    params
+  }])
 })
 
-router.notFound(({_req, res}) => {
+router.post('/user/:id/age/:age',  async (req, res, params) => {
+  const body = await req.body()
+
+  res.ok({
+    body,
+    params
+  })
+})
+
+router.notFound((_req, res) => {
   return res.json(404, [{
     message: 'Not-Found'
   }])
