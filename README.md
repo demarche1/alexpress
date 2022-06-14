@@ -8,11 +8,11 @@ const app = alexpress()
 const server = app.server
 const router = app.router
 
-router.get('/user/[0-9]+', ({req, res, params}) => {
+router.get('/user/:id', (req, res, params) => {
 
   return res.json(200, [{
     msg: 'Hello World!',
-    params: [...params]
+    userId: params.id
   }])
 
 })
@@ -22,7 +22,5 @@ server.listen(3000, () => { console.log('Server on!') })
 
 ### Todos
 
-- [ ] Make a custom Request that retuns body parsed
 - [ ] Tests
 - [ ] Publish that lib on npm
-- [ ] Middleweres
