@@ -8,7 +8,13 @@
     "dev": "npx nodemon index.mjs"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Alessandro Demarche da Silva",
+    "url": "https://github.com/demarche1/"
+  },
+  "engines": {
+    "node": ">=14.16"
+  },
   "license": "ISC",
   "dependencies": {
     "nodemon": "^2.0.16"
